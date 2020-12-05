@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="apple" class="com.zzt.methodOverride.lookup.Apple">
+        <property name="banana" ref="banana"/>
+    </bean>
+    <bean id="banana" class="com.zzt.methodOverride.lookup.Banana" scope="prototype"/>
+
+    <bean id="apple2" class="com.zzt.methodOverride.lookup.Apple">
+        <lookup-method name="getBanana" bean="banana"/>
+    </bean>
+
+</beans>

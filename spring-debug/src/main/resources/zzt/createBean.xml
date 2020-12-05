@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="reflexBean" class="com.zzt.bean.ReflexBean">
+        <property name="name" value="通过反射创建 Bean 对象"/>
+    </bean>
+
+
+    <bean class="com.zzt.createBean.factoryMethod.MyFactoryMethod" id="factoryMethod"/>
+    <bean id="newBean" class="com.zzt.bean.NewBean" factory-bean="factoryMethod"
+          factory-method="createNewBean">
+    </bean>
+
+
+    <bean class="com.zzt.createBean.factoryBean.MyFactoryBean" id="myFactoryBean"/>
+
+    <bean class="com.zzt.bean.NewBean" id="newBeanBySupplier"/>
+    <bean id="supplierBeanFactoryPostProcessor" class="com.zzt.createBean.supplier.SupplierBeanFactoryPostProcessor"/>
+
+
+</beans>

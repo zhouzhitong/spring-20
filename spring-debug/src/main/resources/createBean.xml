@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="reflexBean" class="com.mashibing.createBean.ReflexBean">
+        <property name="name" value="通过反射创建 Bean 对象"/>
+    </bean>
+
+
+    <bean class="com.mashibing.createBean.MyFactoryMethod" id="factoryMethod"/>
+    <bean id="newBean" class="com.mashibing.createBean.NewBean" factory-bean="factoryMethod"
+          factory-method="createNewBean">
+    </bean>
+
+
+    <bean class="com.mashibing.createBean.MyFactoryBean" id="myFactoryBean"/>
+
+
+    <bean class="com.mashibing.createBean.SupplierBeanFactoryPostProcessor"/>
+
+
+</beans>
