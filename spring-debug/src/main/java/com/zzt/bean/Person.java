@@ -1,33 +1,51 @@
 package com.zzt.bean;
 
-import java.util.Date;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
- * 描述：<br>
- * </>
- *
- * @author 周志通
- * @version 1.0.0
- * @date 2020/12/4 22:46
- **/
+ 描述：<br>
+ </>
+ @author 周志通
+ @version 1.0.0
+ @date 2020/12/4 22:46 **/
+@Component
+//@Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Person {
 
     private String name;
     private Integer age;
-    private Date birthday;
 
     public Person() {
     }
 
     public Person(String name, Integer age) {
-        this(name, age, new Date());
+        setAge(age);
+        setName(name);
     }
 
-    public Person(String name, Integer age, Date birthday) {
-        this();
-        this.name = name;
+//    @Autowired
+    public Person(Integer age, String name) {
+        this(name, age);
+    }
+
+    public Person(Integer age) {
         this.age = age;
-        this.birthday = birthday;
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("执行了 init()");
+    }
+
+    @PreDestroy
+    public void destroy(){
+        System.out.println("执行了 destroy()");
     }
 
     @Override
@@ -35,7 +53,6 @@ public class Person {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
-                ", birthday=" + birthday +
                 '}';
     }
 
@@ -55,11 +72,4 @@ public class Person {
         this.age = age;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
 }
