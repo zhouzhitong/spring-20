@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--    <context:component-scan base-package="com.zzt.populateBean.annotation"/>-->
+
+
+    <!--<bean id="person1" class="com.zzt.populateBean.Person" autowire="byName">
+   </bean>-->
+
+    <bean class="com.zzt.populateBean.MyInstantiationAwareBeanPostProcessorToPopulate"/>
+
+    <bean id="person" class="com.zzt.populateBean.Person">
+        <property name="id" value="1"/>
+        <!--<property name="name" value=""/>-->
+        <property name="address" ref="address"/>
+        <property name="age" value="31"/>
+        <property name="hobbies">
+            <list>
+                <value>zhangsan</value>
+                <value>lisi</value>
+            </list>
+        </property>
+        <property name="gender" value="男"/>
+        <property name="books">
+            <list>
+                <bean class="com.zzt.populateBean.Book">
+                    <property name="name" value="阿里波特"/>
+                    <property name="author" value="张三"/>
+                    <property name="price" value="123.00"/>
+                </bean>
+                <ref bean="book"/>
+            </list>
+        </property>
+        <property name="sets">
+            <set>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>1</value>
+            </set>
+        </property>
+        <property name="maps">
+            <map key-type="java.lang.String" value-type="java.lang.Object">
+                <entry key="zhangsan" value="book"/>
+                <entry key="lisi" value-ref="person1"/>
+            </map>
+        </property>
+        <property name="properties">
+            <map key-type="java.lang.String" value-type="java.lang.Object">
+                <entry key="zhangsan" value="property-books"/>
+                <entry key="lisi" value-ref="person1"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="person1" class="com.zzt.populateBean.Person" autowire="byName"/>
+
+    <bean name="book" class="com.zzt.populateBean.Book">
+        <property name="name" value="三国演义"/>
+        <property name="author" value="李四"/>
+        <property name="price" value="9.9"/>
+    </bean>
+
+
+    <bean id="address" class="com.zzt.populateBean.Address">
+        <property name="province" value="河北"/>
+        <property name="city" value="邯郸"/>
+        <property name="town" value="武安"/>
+    </bean>
+
+
+</beans>
